@@ -7,8 +7,8 @@ namespace SortVisualizer.Pages
 		BubbleSort,
 		SelectionSort,
 		InsertionSort,
-        QuickSort,
-        MergeSort,
+        Quicksort,
+        Mergesort,
 	}
 
 	public partial class Index : ComponentBase
@@ -55,10 +55,10 @@ namespace SortVisualizer.Pages
 					AlgorithmToUse = Algorithms.InsertionSort;
                     break;
                 case "quicksort":
-                    AlgorithmToUse = Algorithms.QuickSort;
+                    AlgorithmToUse = Algorithms.Quicksort;
                     break;
                 case "merge":
-                    AlgorithmToUse = Algorithms.MergeSort;
+                    AlgorithmToUse = Algorithms.Mergesort;
                     break;
 			}
 
