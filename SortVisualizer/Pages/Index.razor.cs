@@ -13,15 +13,30 @@ namespace SortVisualizer.Pages
 
 	public partial class Index : ComponentBase
 	{
-		private int Seed { get; set; } = 42;
+        private int[]? originalArray;//Do not modify this!
+
+        //Properties for the UI
+        private int Seed { get; set; } = 42;
 		public int ArraySize { get; set; } = 1000;
-		public int[] Array { get; set; }
-        private int[] originalArray;//Do not modify this!
+        //--------------------------------------------
 
-        public Algorithms AlgorithmToRun { get; set; } = Algorithms.BubbleSort;//Default value
 
-		//Called when the component is initialized
-		protected override void OnInitialized()
+#pragma warning disable CS8618 //Suppress nullable warning
+        //The array to sort
+        public int[] Array { get; set; }
+#pragma warning restore CS8618 
+
+        //The algorithm to use for sorting
+        public Algorithms AlgorithmToUse { get; set; } = Algorithms.BubbleSort;//Default value
+
+        //Gets called when the user clicks the "Go!" button
+        private void Sort()
+        {
+            //TODO
+        }
+
+        //Called when the component is initialized
+        protected override void OnInitialized()
 		{
 			Randomize();
 		}
@@ -31,28 +46,28 @@ namespace SortVisualizer.Pages
 			switch (e.Value!.ToString()!)
 			{
 				case "bubble":
-                    AlgorithmToRun = Algorithms.BubbleSort;
+                    AlgorithmToUse = Algorithms.BubbleSort;
                     break;
 				case "selection":
-					AlgorithmToRun = Algorithms.SelectionSort;
+					AlgorithmToUse = Algorithms.SelectionSort;
                     break;
 				case "insertion":
-					AlgorithmToRun = Algorithms.InsertionSort;
+					AlgorithmToUse = Algorithms.InsertionSort;
                     break;
                 case "quicksort":
-                    AlgorithmToRun = Algorithms.QuickSort;
+                    AlgorithmToUse = Algorithms.QuickSort;
                     break;
                 case "merge":
-                    AlgorithmToRun = Algorithms.MergeSort;
+                    AlgorithmToUse = Algorithms.MergeSort;
                     break;
 			}
 
-			Console.WriteLine($"Algorithm to run: {AlgorithmToRun}");
+			Console.WriteLine($"Algorithm to run: {AlgorithmToUse}");
 		}
 
 		public void Reset()
 		{ 
-			Array = originalArray;
+			Array = originalArray!.ToArray();
 		}
 
 		private void Randomize()
@@ -60,12 +75,8 @@ namespace SortVisualizer.Pages
             //Populate the array with random numbers using LINQ
             Random rand = new Random(Seed);
             Array = Enumerable.Range(0, ArraySize).Select(x => x = rand.Next(1, ArraySize)).ToArray();
-            originalArray = Array;
+            //Clone Array into originalArray
+            originalArray = Array.ToArray();
         }
-
-		private void Sort()
-		{ 
-			//TODO
-		}
 	}
 }
