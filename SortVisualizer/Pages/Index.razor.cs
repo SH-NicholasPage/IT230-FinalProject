@@ -17,7 +17,7 @@ namespace SortVisualizer.Pages
 
         //Properties for the UI
         private int Seed { get; set; } = 42;
-		public int ArraySize { get; set; } = 1000;
+		public int ArraySize { get; set; } = 800;
         //--------------------------------------------
 
 
@@ -30,9 +30,14 @@ namespace SortVisualizer.Pages
         public Algorithms AlgorithmToUse { get; set; } = Algorithms.BubbleSort;//Default value
 
         //Gets called when the user clicks the "Go!" button
-        private void Sort()
+        private async Task Sort()
         {
             //TODO
+        }
+
+        public void RepaintScreen()
+        {
+            StateHasChanged();
         }
 
         //Called when the component is initialized
@@ -74,7 +79,7 @@ namespace SortVisualizer.Pages
 		{
             //Populate the array with random numbers using LINQ
             Random rand = new Random(Seed);
-            Array = Enumerable.Range(0, ArraySize).Select(x => x = rand.Next(1, ArraySize)).ToArray();
+            Array = Enumerable.Range(0, ArraySize).Select(x => x = rand.Next(1, 1000)).ToArray();
             //Clone Array into originalArray
             originalArray = Array.ToArray();
         }
