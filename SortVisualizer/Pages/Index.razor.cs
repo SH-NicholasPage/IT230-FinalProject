@@ -19,6 +19,7 @@ namespace SortVisualizer.Pages
     {
         O_1,        // Constant
         O_logN,     // Logarithmic
+        O_sqrtN,    // Square root time
         O_N,        // Linear
         O_NlogN,    // Linearithmic
         O_N2,       // Quadratic
@@ -247,6 +248,8 @@ namespace SortVisualizer.Pages
                     return "O(1)";
                 case Complexity.O_logN:
                     return "O(log n)";
+                case Complexity.O_sqrtN:
+                    return "O(√n)";
                 case Complexity.O_N:
                     return "O(n)";
                 case Complexity.O_NlogN:
